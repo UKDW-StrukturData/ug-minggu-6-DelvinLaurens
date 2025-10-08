@@ -1,5 +1,4 @@
 import pandas
-
 # RULES:
 # 1. JANGAN GANTI NAMA CLASS ATAU FUNGSI YANG ADA
 # 2. JANGAN DELETE FUNGSI YANG ADA
@@ -17,13 +16,22 @@ class excelManager:
     
     def insertData(self,newData:dict,saveChange:bool=False):
         # kerjakan disini
+        baris = pandas.DataFrame([newData])
+        self.__data = pandas.concat([self.__data, baris], ignore_index=True)
+        # masuk = pd.dataframe([newData])
+        if not isinstance(newData, dict):
+            raise ValueError("newData harus berupa dictionary")
+
         # clue cara insert row: df = pandas.concat([df, pandas.DataFrame([{"NIM":0,"Nama":"Udin","Nilai":1000}])], ignore_index=True)
         
-        if (saveChange): self.saveChange()
-        pass
+        if (saveChange): 
+            self.saveChange()
     
     def deleteData(self, targetedNim:str,saveChange:bool=False):
         # kerjakan disini
+        if 'NIM' not in self.__data.columns:
+            return None
+        a = self.__data
         # clue cara delete row: df.drop(indexBaris, inplace=True); contoh: df.drop(0,inplace=True)
         
         
@@ -32,6 +40,7 @@ class excelManager:
     
     def editData(self, targetedNim:str, newData:dict,saveChange:bool=False) -> dict:
         # kerjakan disini
+        edit = df.at[indexBaris,namaKolom] = value; contoh: df.at[0,ID] = 1
         # clue cara ganti value: df.at[indexBaris,namaKolom] = value; contoh: df.at[0,ID] = 1
         if (saveChange): self.saveChange()
         pass

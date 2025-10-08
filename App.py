@@ -51,6 +51,8 @@ if (choice in ("Insert","Edit")):
 option = ["None",">","<","=","<=",">="]
 filterSelectBox = st.selectbox("Opsi Filter: ",option)
 
+
+
 if (filterSelectBox == "None"):
     st.table(em.getDataFrame()) # tabel biasa
 else:
@@ -59,6 +61,18 @@ else:
 
 if (filter != ""):
     if (filterSelectBox == ">"):
-        st.table(em.getDataFrame()[em.getDataFrame()[targetFilterColumn] > int(filter)]) # cara filter
+        st.table(em.getDataFrame()[em.getDataFrame()[targetFilterColumn] > int(filter)])
+    # cara filter
     # TODO: lanjutkan code di atas
     # note: cara filter ada di modul
+    elif(filterSelectBox == "<"):
+        st.table(em.getDataFrame()[em.getDataFrame()[targetFilterColumn] < int(filter)])
+    elif(filterSelectBox == ">="):
+        st.table(em.getDataFrame()[em.getDataFrame()[targetFilterColumn] >= int(filter)])
+    elif(filterSelectBox == "<="):
+        st.table(em.getDataFrame()[em.getDataFrame()[targetFilterColumn] <= int(filter)])
+    elif(filterSelectBox == '='):
+        st.table(em.getDataFrame()[em.getDataFrame()[targetFilterColumn] == int(filter)])
+    elif(filterSelectBox == 'None'):
+        st.table(em.getDataFrame())
+
